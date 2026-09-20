@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #efe9dd;
+  --color-paper-deep: #e3dbcb;
+  --color-ink: #17150f;
+  --color-ink-soft: #3a362b;
+  --color-ink-faint: #6b6252;
+  --color-rubric: #a62b1f;
+  --color-rubric-lit: #e0604a;
+  --color-night: #100e0a;
+
+  --font-serif: "EB Garamond", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 17px;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-rubric);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 1.5px solid var(--color-rubric);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Petites capitales tracées : folios, rubriques, appareil */
+  .caps {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+  }
+  .caps-sm {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    font-size: 0.625rem;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Grain du papier bible */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 0.38;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  }
+  .rule-red {
+    border-top: 1px solid color-mix(in srgb, var(--color-rubric) 45%, transparent);
+  }
+  .rule-ink {
+    border-top: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+  }
+}
